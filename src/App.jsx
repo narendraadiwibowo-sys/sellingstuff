@@ -417,7 +417,7 @@ function Catalog({ onSelectVespa, onOpenOrder, onShare }) {
                       className="btn btn-order-direct"
                       onClick={() => onOpenOrder(v)}
                     >
-                      {v.isSold ? 'Pesan / Pre-Order Unit' : 'Pesan Langsung'}
+                      Pesan / Pre-Order
                     </button>
 
                     <button
@@ -505,7 +505,7 @@ function PriceTableSection({ onSelectVespa, onOpenOrder }) {
                     className="btn-table-order"
                     onClick={() => onOpenOrder(v)}
                   >
-                    {v.isSold ? 'Pre-Order' : 'Pesan'}
+                    Pesan / Pre-Order
                   </button>
                 </td>
               </tr>
@@ -1053,7 +1053,7 @@ function MotorDetailModal({ vespa, onClose, onOpenOrder, onShare }) {
                 onOpenOrder(vespa)
               }}
             >
-              {vespa.isSold ? 'Pesan / Pre-Order Unit Ini' : 'Booking Online Sekarang'}
+              Pesan / Pre-Order
             </button>
 
             <button className="btn btn-secondary" onClick={() => onShare(vespa)}>
