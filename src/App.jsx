@@ -804,18 +804,6 @@ function OrderModal({ vespa, onClose }) {
                 </div>
               </div>
 
-              <div className="form-group">
-                <label>
-                  Discord Webhook URL Showroom <small style={{ fontWeight: 400, color: 'var(--ink-secondary)' }}>(Opsional - Otomatis notif ke bot Discord)</small>
-                </label>
-                <input
-                  type="url"
-                  placeholder="https://discord.com/api/webhooks/..."
-                  defaultValue={localStorage.getItem('vespa_discord_webhook') || ''}
-                  onChange={(e) => localStorage.setItem('vespa_discord_webhook', e.target.value.trim())}
-                />
-              </div>
-
               <button type="submit" className="btn btn-primary btn-block">
                 Lanjut ke Pembayaran Booking &rarr;
               </button>
@@ -918,17 +906,54 @@ function OrderModal({ vespa, onClose }) {
             <h3>Pemesanan Berhasil Dicatat!</h3>
             <p>
               Terima kasih <strong>{formData.name}</strong>! Tanda jadi booking untuk unit{' '}
-              <strong>{vespa.name}</strong> telah masuk ke sistem kami dengan nomor referensi{' '}
-              <strong>{invoiceNo}</strong>.
+              <strong>{vespa.name}</strong> telah masuk ke sistem showroom kami.
             </p>
 
+            <div className="receipt-box">
+              <div className="receipt-header">
+                <strong>RINCIAN PEMBAYARAN (DEMO)</strong>
+                <span className="receipt-badge">LUNAS BOOKING</span>
+              </div>
+              <div className="receipt-row">
+                <span>No. Invoice:</span>
+                <strong>{invoiceNo}</strong>
+              </div>
+              <div className="receipt-row">
+                <span>Unit Motor:</span>
+                <span>{vespa.name}</span>
+              </div>
+              <div className="receipt-row">
+                <span>Harga Unit:</span>
+                <span>{vespa.priceLabel}</span>
+              </div>
+              <div className="receipt-row">
+                <span>Nama Pemesan:</span>
+                <span>{formData.name}</span>
+              </div>
+              <div className="receipt-row">
+                <span>WhatsApp:</span>
+                <span>{formData.phone}</span>
+              </div>
+              <div className="receipt-row">
+                <span>Kota Tujuan:</span>
+                <span>{formData.city}</span>
+              </div>
+              <div className="receipt-row">
+                <span>Metode Pembayaran:</span>
+                <span>{formData.paymentType === 'qris' ? 'QRIS Pembayaran Resmi' : 'BCA Virtual Account'}</span>
+              </div>
+              <div className="receipt-divider" />
+              <div className="receipt-row total">
+                <span>Nominal Booking:</span>
+                <strong className="text-teal">Rp 2.500.000</strong>
+              </div>
+              <div className="receipt-note">
+                Sisa pelunasan dilakukan saat serah terima unit di showroom atau via towing.
+              </div>
+            </div>
+
             <div className="success-box">
-              {discordStatus && (
-                <div className="discord-alert">
-                  <strong>Discord Bot:</strong> {discordStatus}
-                </div>
-              )}
-              <p>Kirimkan bukti booking ini ke tim WhatsApp kami agar unit langsung ditag SOLD/BOOKED untuk Anda.</p>
+              <p>Kirimkan bukti booking ini ke tim WhatsApp kami agar unit langsung dikunci untuk Anda.</p>
               <a
                 className="btn btn-wa-smart btn-block"
                 href={waLink(
